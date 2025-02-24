@@ -1,0 +1,8 @@
+---
+- name: replace line
+  become: true
+  lineinfile: 
+    path: /Library/Preferences/SystemConfiguration/com.apple.vmnet.plist
+    regexp: '        <string>192(.*)' 
+    line: "        <string>100.127.0.1</string>"
+    backrefs: yes
