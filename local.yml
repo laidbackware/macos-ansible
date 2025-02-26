@@ -6,6 +6,22 @@
     - include_vars: vars.yml
       tags: ["always"]
 
+    - name: Checkout shell-env
+      ansible.builtin.git:
+        repo: 'https://github.com/laidbackware/shell-env.git'
+        dest: "{{ ansible_env.HOME }}/.shell-env"
+
+    - name: Ensuring Homebrew Is Installed
+      stat:
+        path: /opt/homebrew/bin/brew
+      register: homebrew_check
+
+    - name: Installing Homebrew
+      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when:
+        - not homebrew_check.stat.exists
+
+
     # - name: Create the temporary directory
     #   tempfile:
     #     state: directory
@@ -28,17 +44,11 @@
     - role: dev/git-setup
       tags: ["git-setup"]
 
-    # - role: shell/aliases
-    #   tags: ["shell-aliases", "shell"]
-
-    # - role: shell/completion
-    #   tags: ["shell-completion", "shell"]
-
-    # - role: shell/functions
-    #   tags: ["shell-functions", "shell"]
+    - role: homebrew
+      tags: ["homebrew"]
     
-    # - role: asdf/install
-    #   tags: ["asdf-install"]
+    - role: asdf/install
+      tags: ["asdf-install"]
 
     # - role: apps/vscode
     #   when: desktop_mode or laptop_mode or chromebook_mode
@@ -54,8 +64,8 @@
     # - role: shell/starship
     #   tags: ["starship"]
 
-    # - role: shell/bashrc
-    #   tags: ["shell-bashrc", "shell"]
+    - role: shell/zshrc
+      tags: ["shell-zshrc", "shell"]
 
 
   # post_tasks:

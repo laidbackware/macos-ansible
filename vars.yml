@@ -3,6 +3,22 @@ git:
   email: laidbackware.git@gmail.com
   name: Matt Proud
 
+upgrade_homebrew_packages: false
+brew_cask_packages:
+  - iterm2
+  # - visual-studio-code
+brew_packages:
+  - colima
+  - direnv
+  - gimme
+  - jq
+  - nmap
+  - pyenv
+  - terraform
+  - tree
+  - wget
+
+# brew services start colima
 asdf:
   version: v0.14.1
   asdf_plugins:

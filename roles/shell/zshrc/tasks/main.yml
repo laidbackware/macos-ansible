@@ -1,0 +1,22 @@
+---
+
+- name: Touch .bash_secrets.sh
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.bash_secrets"
+    state: touch
+
+- name: Add to .bashrc
+  ansible.builtin.blockinfile:
+    path: "{{ home_dir }}/.zshrc"
+    block: |
+      . $HOME/.shell-env/.shell_functions.sh
+      . $HOME/.shell-env/.shell_aliases.sh
+      . $HOME/.shell-env/.shell_completion.sh
+      . $HOME/.shell_secrets
+      . "$HOME/.asdf/asdf.sh"
+      . "$HOME/.asdf/completions/asdf.bash"
+      export EDITOR=vim
+      
+      eval "$(direnv hook zsh)"
+    insertbefore: EOF
+    marker: '# {mark} ANSIBLE MANAGED BLOCK - .bash_'

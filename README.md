@@ -15,5 +15,5 @@ Sign in to the desktop app, enable CLI integration and SSH agent in the Develope
 ## Run the playbook
 
 ```sh
-sudo ansible-playbook local.yml
+ansible-playbook local.yml --ask-become-pass
 ```
