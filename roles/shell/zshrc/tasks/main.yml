@@ -11,7 +11,7 @@
     block: |
       . $HOME/.shell-env/.shell_functions.sh
       . $HOME/.shell-env/.shell_aliases.sh
-      . $HOME/.shell-env/.shell_completion.sh
+      . $HOME/.shell-env/.shell_completion.zsh
       . $HOME/.shell_secrets
       . "$HOME/.asdf/asdf.sh"
       . "$HOME/.asdf/completions/asdf.bash"
